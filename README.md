@@ -1,1 +1,1 @@
-# dom-project-I
+# a collection of simple DOM projects
