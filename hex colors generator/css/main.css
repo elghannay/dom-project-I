@@ -18,9 +18,15 @@ body {
 button {
   /* padding-left: 20px; */
   padding: 10px 20px;
-  background-color: blue !important;
+  background-color: rgb(10, 10, 44) !important;
   color: white;
 }
 button:hover {
   background-color: red;
+}
+h1 {
+  font-size: 4rem;
+  color: grey;
+  text-align: center;
+  margin-top: auto;
 }
