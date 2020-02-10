@@ -18,6 +18,7 @@ let colors = [
   '8',
   '9'
 ];
+
 let random;
 btn.addEventListener('click', generateHex);
 function generateHex() {
