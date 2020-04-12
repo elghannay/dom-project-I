@@ -1,0 +1,94 @@
+:root {
+  --success-color: rgb(80, 230, 80);
+  --error-color: rgb(253, 1, 1);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+  outline: none;
+}
+
+body {
+  background-color: #f9fafb;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  width: 400px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+  padding: 20px 40px;
+}
+
+.container h2 {
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.form-control {
+  margin-bottom: 20px;
+  position: relative;
+}
+.form-control label {
+  display: block;
+  margin-bottom: 10px;
+  color: rgb(161, 156, 156);
+}
+[placeholder] {
+  color: rgb(161, 156, 156);
+}
+.form-control input {
+  padding: 8px;
+  border: 1px solid #c4c4c4;
+  border-radius: 4px;
+  display: block;
+  width: 100%;
+  font-size: 14px;
+  color: grey;
+}
+
+.form-control input:focus {
+  border: 1px solid grey;
+}
+.form-control.success input {
+  border-color: var(--success-color);
+}
+.form-control.error input {
+  border-color: var(--error-color);
+}
+.form-control small {
+  visibility: hidden;
+  /* position: absolute;
+  bottom: 0;
+  left: 0; */
+}
+.form-control.error small {
+  visibility: visible;
+  color: var(--error-color);
+}
+button {
+  display: block;
+  width: 100%;
+  background-color: rgb(14, 14, 110);
+  border: rgb(14, 14, 110);
+  padding: 10px;
+  color: white;
+  text-transform: uppercase;
+  font-style: 16px;
+  border-radius: 4px;
+  margin-top: 20px;
+  cursor: pointer;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+}
+button:hover {
+  background-color: rgb(61, 61, 184);
+  border: rgb(61, 61, 184);
+  transition: all 0.5s ease;
+}
