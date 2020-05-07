@@ -18,6 +18,7 @@ document.addEventListener('keydown', function (e) {
 	if (!avatar.style.left) return avatar.style.left = `10px`;
 	if (e.key === 'ArrowDown') {
 		avatar.style.top = `${stripPixels(avatar.style.top) + 50}px`;
+		console.dir(e.target);
 	}
 	if (e.key === 'ArrowUp') {
 		avatar.style.top = `${stripPixels(avatar.style.top) - 50}px`;
@@ -47,3 +48,4 @@ function moveCoin() {
 }
 
 moveCoin()
+
