@@ -1,0 +1,30 @@
+.circle {
+    position: relative;
+}
+
+.controls {
+    position: absolute;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+input {
+    display: block;
+    padding: 10px 20px;
+    -webkit-appearance: none;
+    width: 286px;
+    text-align: center;
+    font-size: 6rem;
+    background-color: white;
+    border: none;
+}
+
+button {
+    padding: 10px 20px;
+    outline: none;
+    border: 1px solid rgba(38, 38, 233, 0.61);
+    background-color: rgba(38, 38, 233, 0.61);
+    text-align: center;
+}
