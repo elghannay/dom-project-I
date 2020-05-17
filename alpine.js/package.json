@@ -4,7 +4,7 @@
   "description": "the goal of this project is to make use of the different fonctionalities of the library and use the code here as a boilerplate for future projects",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tailwind": "tailwind build main.css -o style.css"
   },
   "author": "elghannay",
   "license": "ISC",
