@@ -1,0 +1,15 @@
+{
+  "name": "alpine",
+  "version": "1.0.0",
+  "description": "the goal of this project is to make use of the different fonctionalities of the library and use the code here as a boilerplate for future projects",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "elghannay",
+  "license": "ISC",
+  "dependencies": {
+    "alpinejs": "^2.3.5",
+    "tailwindcss": "^1.4.6"
+  }
+}
