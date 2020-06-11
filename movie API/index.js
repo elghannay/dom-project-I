@@ -3,9 +3,7 @@ complete widget on another project that works with a recipe api we
 need to go through the code line by line and adjust it accordingly   */
 
 const apiKey = 'd5c3d21e';
-
-autocomplete({
-  root: document.querySelector('.autocomplete'),
+const autoCompleteConfig = {
   renderOption(movie) {
     const imgSrc = movie.Poster === 'N/A' ? '' : movie.Poster;
     return `
@@ -29,7 +27,17 @@ autocomplete({
     if (response.data.Error) {
       return [];
     }
-    return response.data.Search;}
+    return response.data.Search;
+  }
+}
+autocomplete({
+  ...autoCompleteConfig,
+  root: document.querySelector('#left-autocomplete'),
+})
+
+autocomplete({
+  ...autoCompleteConfig,
+  root: document.querySelector('#right-autocomplete'),
 })
 
 onMovieSelect = async (movie) => {

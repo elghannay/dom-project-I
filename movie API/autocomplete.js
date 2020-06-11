@@ -1,7 +1,7 @@
 autocomplete = ({ root, renderOption, onOptionSelect, inputValue, fetchData}) => {
     
 root.innerHTML = `
-    <label for="input"><b>search for a title</b></label>
+    <label for="input"><b>search for a item</b></label>
     <input class="input" />
     <div class="dropdown">
         <div class="dropdown-menu">
