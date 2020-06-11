@@ -9,9 +9,9 @@
 //         , 500);
 // }
 
-/* now we have a function that can be used 
-with any kind of dom element not only with inputs. */
-
+/* now we have a function that can be used to debounce
+ any kind of dom element not only with inputs. */
+// the debounce function return a function that accepts arguments
 const debounce = (func, delay = 1000) => {
     let timeoutId;
     return (...args) => {
@@ -22,3 +22,4 @@ const debounce = (func, delay = 1000) => {
             , delay);
     }
 }
+
