@@ -6,6 +6,9 @@ const { world } = engine;
 const cells = 3;
 const width = 800;
 const height = 500;
+
+const unitLength = width / cells;
+
 const render = Render.create({
   element: document.body,
   engine: engine,
@@ -94,6 +97,19 @@ const stepThroughCell = (row, column) => {
     else if (direction === 'right') verticals[row][column] = true;
     else if (direction === 'up') horizontals[row - 1][column] = true;
     else if (direction === 'down') horizontals[row][column] = true;
+
+    // calling the function for each cell in the maze.
+    stepThroughCell(nextRow, nextColumn);
   }
 };
-stepThroughCell(1, 1);
+stepThroughCell(startRow, startColumn);
+
+verticals.forEach((row, rowIndex) => {
+  row.forEach((open, columnIndex) => {
+    if (open) return;
+    else {
+      const wall = Bodies.rectangle(columnIndex * unitLength + unitLength / 2, rowIndex * unitLength + unitLength, unitLength, 10);
+      World.add(world, walls);
+    }
+  });
+});
