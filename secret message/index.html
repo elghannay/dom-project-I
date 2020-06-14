@@ -6,21 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="materialize.min.css">
     <title>secret message app</title>
+    <style>
+        .row {
+            margin-top: 25vh;
+        }
+
+        h1 {
+            margin-top: 0
+        }
+    </style>
 </head>
 
 <body>
     <div class="row">
         <div class="col s8 offset-s2">
-            <div class="card-panel">
-                <form class="form">
+            <div class="card-panel message-show hide">
+                <h1></h1>
+                <div><a href="index.html">Create your own secret message</a></div>
+            </div>
+            <div class="card-panel message-form">
+                <form>
                     <label for="">enter a Secret message</label>
                     <input class="message-input" type="text">
                     <button class="btn">submit</button>
                 </form>
             </div>
-            <div>
-                <label for="">copy the link to a friend</label>
-                <input type="text" class="link-input">
+            <div class="card-panel link-form hide">
+                <form action="">
+                    <label for="">copy the link to a friend</label>
+                    <input type="text" class="link-input">
+                </form>
             </div>
         </div>
     </div>
