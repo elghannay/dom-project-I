@@ -2,8 +2,13 @@
 // npm link
 const fs = require('fs');
 const chalk = require('chalk');
+const path = require('path');
 
-fs.readdir(process.cwd(), async (err, files) => {
+// adding arguments to our command line instruction.
+// console.log(process.argv);
+const targetDir = process.argv[2] || process.cwd();
+
+fs.readdir(targetDir, async (err, files) => {
   if (err) console.log(err);
 
   /***************************************/
@@ -99,7 +104,7 @@ fs.readdir(process.cwd(), async (err, files) => {
   /***************************************/
   //   we run all the promises code in parallel which mean that we may get a better performance.
   //   loop on each file and return promise stat that get created when we call lstat.
-  const statsPromises = files.map((file) => lstat(file));
+  const statsPromises = files.map((file) => lstat(path.join(targetDir, file)));
   //   waiting for the promises to be resolved. and store the resulting array in statsArray
   const statsArray = await Promise.all(statsPromises);
   for (const stat of statsArray) {
