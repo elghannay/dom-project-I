@@ -35,28 +35,30 @@ fs.readdir(targetDir, async (err, files) => {
   //   the downside is that this solution get pretty complex
   //   rather quickly especially if you have promises inside.
   //   a callback based approach, maintain an array of the results
-  // from each lstat, add the stat object to this array
-  // once the array is full log it.
+  //   from each lstat, add the stat object to this array
+  //   once the array is full log it.
 
-  //   const arrayStats = Array(files.length).fill(null);
-  //   for (const file of files) {
-  //     const index = files.indexOf(file);
+  // const arrayStats = Array(files.length).fill(null);
+  // for (const file of files) {
+  //   // for each file, mark its index.
+  //   const index = files.indexOf(file);
 
-  //     fs.lstat(file, (err, stats) => {
-  //       if (err) console.log(err);
-  //       arrayStats[index] = stats;
+  //   fs.lstat(file, (err, stats) => {
+  //     if (err) console.log(err);
+  //     // store the stat object of file in the array
+  //     arrayStats[index] = stats;
 
-  //       const ready = arrayStats.every((stats) => {
-  //         return stats;
-  //       });
-
-  //       if (ready) {
-  //         arrayStats.forEach((stats, index) => {
-  //           console.log(files[index], stats.isFile());
-  //         });
-  //       }
+  //     const ready = arrayStats.every((stats) => {
+  //       return stats;
   //     });
-  //   }
+
+  //     if (ready) {
+  //       arrayStats.forEach((stats, index) => {
+  //         console.log(files[index], stats.isFile());
+  //       });
+  //     }
+  //   });
+  // }
   /***************************************/
   /******** end second solution **********/
   /***************************************/
@@ -79,8 +81,8 @@ fs.readdir(targetDir, async (err, files) => {
 
   //   method 2 leveraging an internal function of node.
 
-  //   const util = require('util');
-  //   const lstat = util.promisify(fs.lstat);
+  // const util = require('util');
+  // const lstat = util.promisify(fs.lstat);
 
   //   method 3 using already defined promise based methods of node.
 
@@ -104,6 +106,7 @@ fs.readdir(targetDir, async (err, files) => {
   /***************************************/
   //   we run all the promises code in parallel which mean that we may get a better performance.
   //   loop on each file and return promise stat that get created when we call lstat.
+  //   path.join > add support for files that are not in the current directory like nls ~ || nls ..
   const statsPromises = files.map((file) => lstat(path.join(targetDir, file)));
   //   waiting for the promises to be resolved. and store the resulting array in statsArray
   const statsArray = await Promise.all(statsPromises);

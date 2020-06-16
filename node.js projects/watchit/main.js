@@ -3,7 +3,7 @@
 const chokidar = require('chokidar');
 const debounce = require('lodash.debounce');
 const program = require('caporal');
-const fs = require('fs');
+const fs = require('fs').promises;
 const { spawn } = require('child_process');
 
 // child processes : run programs inside node programs
@@ -14,7 +14,7 @@ program
   .action(async ({ fileName }) => {
     const name = fileName || 'index.js';
     try {
-      await fs.promises.access(name);
+      await fs.access(name);
     } catch (err) {
       throw new Error(`cannot access the file "${name}"`);
     }
