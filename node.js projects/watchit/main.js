@@ -6,8 +6,8 @@ const program = require('caporal');
 const fs = require('fs');
 const { spawn } = require('child_process');
 
-// child processes allow us to run programs inside our node program
-
+// child processes : run programs inside node programs
+// action function take as arguments an object of .argument()
 program
   .version('1.0.0')
   .argument('[fileName]', 'fileName to execute')
@@ -23,6 +23,7 @@ program
     const start = debounce(() => {
       if (proc) {
         proc.kill();
+        //kill process before you spawn a new one.
       }
       console.log('<<<<<<< program changed >>>>>>');
       proc = spawn('node', [name], { stdio: 'inherit' });
@@ -41,5 +42,5 @@ program.parse(process.argv);
 // chokidar will try to register each file on the directory as been added
 // and since the default behavior of our tool will mark it as file change then
 // it will stop the execution of the code and then rerun it again >
-//  and by rerun it,  chokidar will considered it as 'adding the file' >
+//  and by rerun it,  chokidar will considered it as 'adding the file'
 // as many times as the number of files on our folder.so we need to debounce this function.
