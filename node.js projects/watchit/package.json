@@ -10,6 +10,6 @@
   "author": "",
   "license": "ISC",
   "bin": {
-    "watchit": "index.js"
+    "watchit": "main.js"
   }
 }
