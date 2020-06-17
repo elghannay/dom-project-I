@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
-// watch for any incoming requests of method get and
+// watch for any incoming requests having a method 'get' and
 // a route of  '/' >>> route handler.
 app.get('/', (req, res) => {
   res.send(`
@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 // besides a 'POST' request can have a body and in our case
 // we handle only post requests.
 // so we make use of a library called bodyParser that has
-// a lot of middleware in it.
+// a lot of middleware functionalities.
 
 // const bodyParser = (req, res, next) => {
 //   if (req.method === 'POST') {
