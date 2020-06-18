@@ -1,6 +1,7 @@
 const fs = require('fs');
 const crypto = require('crypto');
-
+const util = require('util');
+const scrypt = util.promisify(crypto.scrypt);
 class UsersRepository {
   constructor(filename) {
     if (!filename) {
@@ -26,8 +27,16 @@ class UsersRepository {
   async create(attrs) {
     attrs.id = this.randomId();
     const records = await this.getAll();
-    records.push(attrs);
+
+    const salt = crypto.randomBytes(8).toString(16);
+    const buffer = await scrypt(attrs.password, salt).toString(16);
+    const record = {
+      ...attrs,
+      password: `${buffer.toString(16)}.${salt}`,
+    };
+    records.push(record);
     await this.writeAll(records);
+    return record;
   }
 
   async writeAll(records) {
