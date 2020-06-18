@@ -42,7 +42,8 @@ app.post('/signin', async (req, res) => {
   const { email, password } = req.body;
   const user = await usersRepo.getOneBy({ email });
   if (!user) return res.send('Email not found');
-  if (password !== user.password) return res.send('password is wrong');
+  const validUser = usersRepo.comparePasswords(user.password, password);
+  if (!validUser) return res.send('password is wrong');
   res.send('welcome back');
 });
 

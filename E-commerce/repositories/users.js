@@ -28,15 +28,26 @@ class UsersRepository {
     attrs.id = this.randomId();
     const records = await this.getAll();
 
-    const salt = crypto.randomBytes(8).toString(16);
-    const buffer = await scrypt(attrs.password, salt).toString(16);
+    const salt = crypto.randomBytes(8).toString('hex');
+    const buffer = await scrypt(attrs.password, salt, 64);
     const record = {
       ...attrs,
-      password: `${buffer.toString(16)}.${salt}`,
+      password: `${buffer.toString('hex')}.${salt}`,
     };
     records.push(record);
     await this.writeAll(records);
     return record;
+  }
+
+  async comparePasswords(saved, supplied) {
+    // saved > the hashed.salt password saved on the data base
+    // supplied > the password provided by the user on signup
+
+    // const hashed = saved.split('.')[0];
+    // const salt = saved.split('.')[1];
+    const [hashed, salt] = saved.split('.');
+    const hashedSuppliedBuffer = await scrypt(supplied, salt, 64);
+    return hashed === hashedSuppliedBuffer.toString('hex');
   }
 
   async writeAll(records) {
