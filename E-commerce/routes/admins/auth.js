@@ -3,6 +3,14 @@ const usersRepo = require('../../repositories/users');
 const signupTemplate = require('../../views/admin/signup');
 const signinTemplate = require('../../views/admin/signin');
 const router = express.Router();
+const { check, validationResult } = require('express-validator');
+const {
+  emailValidation,
+  passwordValidation,
+  passwordConfirmation,
+  loginEmailCheck,
+  loginPasswordCheck,
+} = require('./validators');
 
 router.get('/signup', (req, res) => {
   res.send(signupTemplate({ req }));
@@ -17,28 +25,39 @@ router.get('/signin', (req, res) => {
   res.send(signinTemplate());
 });
 
-router.post('/signin', async (req, res) => {
-  const { email, password } = req.body;
-  const user = await usersRepo.getOneBy({ email });
-  if (!user) return res.send('Email not found');
-  const validUser = UsersRepository.comparePasswords(user.password, password);
-  if (!validUser) return res.send('password is wrong');
-  res.send('welcome back');
-});
+router.post(
+  '/signin',
+  [loginEmailCheck, loginPasswordCheck],
+  async (req, res) => {
+    const errors = validationResult(req);
+    // console.log(errors);
+    const { email, password } = req.body;
 
-router.post('/signup', async (req, res) => {
-  const { email, password, confirmPassword } = req.body;
-  const existingUser = await usersRepo.getOneBy({ email });
-  if (existingUser) {
-    return res.send('this email is already in use');
+    res.send('welcome back');
   }
-  if (password !== confirmPassword) res.send('password must match');
-  res.send('account created');
+);
 
-  // write the user to our file based storage
-  const user = await usersRepo.create({ email, password });
-  // store user id inside user cookie
-  req.session.userID = user.id;
-});
+router.post(
+  '/signup',
+  [emailValidation, passwordValidation, passwordConfirmation],
+  async (req, res) => {
+    const { email, password, confirmPassword } = req.body;
+    // Finds the validation errors in this request and wraps them in an object with handy functions
+    const errors = validationResult(req);
+    console.log(errors);
+    if (confirmPassword !== password) {
+      throw new Error('Passwords must match');
+    }
+    if (!errors.isEmpty()) {
+      res.send(signupTemplate({ req, errors }));
+    } else {
+      // write the user to our file based storage
+      const user = await usersRepo.create({ email, password });
+      // store user id inside user cookie
+      req.session.userID = user.id;
+      res.send('account created');
+    }
+  }
+);
 
 module.exports = router;
