@@ -3,7 +3,7 @@ const usersRepo = require('../../repositories/users');
 const signupTemplate = require('../../views/admin/signup');
 const signinTemplate = require('../../views/admin/signin');
 const router = express.Router();
-const { check, validationResult } = require('express-validator');
+const { validationResult } = require('express-validator');
 const {
   emailValidation,
   passwordValidation,
@@ -13,7 +13,7 @@ const {
 } = require('./validators');
 
 router.get('/signup', (req, res) => {
-  res.send(signupTemplate({ req }));
+  res.send(signupTemplate({}));
 });
 
 router.get('/signout', (req, res) => {
@@ -22,7 +22,7 @@ router.get('/signout', (req, res) => {
 });
 
 router.get('/signin', (req, res) => {
-  res.send(signinTemplate());
+  res.send(signinTemplate({}));
 });
 
 router.post(
@@ -30,10 +30,8 @@ router.post(
   [loginEmailCheck, loginPasswordCheck],
   async (req, res) => {
     const errors = validationResult(req);
-    // console.log(errors);
-    const { email, password } = req.body;
-
-    res.send('welcome back');
+    if (!errors.isEmpty()) res.send(signinTemplate({ errors }));
+    else res.send('welcome back');
   }
 );
 
@@ -49,7 +47,7 @@ router.post(
       throw new Error('Passwords must match');
     }
     if (!errors.isEmpty()) {
-      res.send(signupTemplate({ req, errors }));
+      res.send(signupTemplate({ errors }));
     } else {
       // write the user to our file based storage
       const user = await usersRepo.create({ email, password });

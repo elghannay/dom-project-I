@@ -1,14 +1,7 @@
 const template = require('./../template');
+const { getError } = require('../helpers');
 
-const getError = (errors, prop) => {
-  try {
-    return errors.mapped()[prop].msg;
-  } catch (err) {
-    return '';
-  }
-};
-
-module.exports = ({ req, errors }) => {
+module.exports = ({ errors }) => {
   return template({
     content: `
 <form method="post">
