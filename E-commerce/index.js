@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const authRouter = require('./routes/admins/auth');
+const productsRouter = require('./routes/admins/products');
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(
 );
 // add it after the middleware
 app.use(authRouter);
+app.use(productsRouter);
 
 app.listen(3000, () => {
   console.log('listening');
