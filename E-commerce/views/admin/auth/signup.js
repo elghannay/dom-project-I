@@ -1,5 +1,5 @@
-const template = require('./../template');
-const { getError } = require('../helpers');
+const template = require('../../template');
+const { getError } = require('../../helpers');
 
 module.exports = ({ errors }) => {
   return template({
