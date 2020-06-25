@@ -2,6 +2,8 @@ const usersRepo = require('../../repositories/users');
 const { check } = require('express-validator');
 
 module.exports = {
+  titleValidation: check('title').trim(),
+  priceValidation: check('price').trim().toFloat().isFloat(),
   emailValidation: check('email')
     .trim()
     .normalizeEmail()
