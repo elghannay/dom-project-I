@@ -17,6 +17,7 @@ router.post(
     const errors = validationResult(req);
     if (!errors.isEmpty()) res.send(console.log(errors));
     else res.send('submitted');
+    console.log(req.body);
   }
 );
 
