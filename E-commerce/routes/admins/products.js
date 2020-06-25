@@ -1,5 +1,9 @@
 const express = require('express');
+var multer = require('multer');
 const router = express.Router();
+
+var upload = multer({ storage: multer.memoryStorage() });
+
 const productsRepo = require('../../repositories/products');
 const productTemplate = require('../../views/admin/products/new');
 const { validationResult } = require('express-validator');
@@ -12,12 +16,13 @@ router.get('/admins/products/new', (req, res) => {
 
 router.post(
   '/admins/products/new',
-  [titleValidation, priceValidation],
+  [titleValidation, priceValidation, upload.single('image')],
   (req, res) => {
     const errors = validationResult(req);
-    if (!errors.isEmpty()) res.send(console.log(errors));
-    else res.send('submitted');
-    console.log(req.body);
+    // if (!errors.isEmpty()) res.send(console.log(errors));
+    // else res.send('submitted');
+    console.log(req.file);
+    res.send('submitted');
   }
 );
 
