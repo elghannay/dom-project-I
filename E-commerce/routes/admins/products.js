@@ -1,8 +1,8 @@
 const express = require('express');
-var multer = require('multer');
-const router = express.Router();
+const multer = require('multer');
 
-var upload = multer({ storage: multer.memoryStorage() });
+const router = express.Router();
+const upload = multer({ storage: multer.memoryStorage() });
 
 const productsRepo = require('../../repositories/products');
 const productTemplate = require('../../views/admin/products/new');
