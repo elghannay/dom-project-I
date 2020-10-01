@@ -1,0 +1,1 @@
+const emitter = require('./emitter');
