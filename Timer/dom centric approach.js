@@ -22,7 +22,7 @@ const timer = new Timer(startButton, pauseButton, duration, {
 });
 
 
-/* bugs to fix for the moment and features to add
+/* bugs to fix at the moment and features to add
 when pausing the animation start from zero
 when clicking for the second time on the start button
 the pause does not work
